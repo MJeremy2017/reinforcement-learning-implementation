@@ -120,6 +120,8 @@ class Agent:
             if self.State.isEnd:
                 # back propagate
                 reward = self.State.giveReward()
+                # explicitly assign end state to reward values
+                self.state_values[self.State.state] = reward  # this is optional
                 print("Game End Reward", reward)
                 for s in reversed(self.states):
                     reward = self.state_values[s] + self.lr * (reward - self.state_values[s])
