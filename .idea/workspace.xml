@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7712165c-0da5-4644-9518-9ee18f8924da" name="Default Changelist" comment="" />
+    <list default="true" id="7712165c-0da5-4644-9518-9ee18f8924da" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/GridWorld/GridWorld.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/GridWorld/GridWorld.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Multi-ArmBandit/Bandit.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Multi-ArmBandit/Bandit.ipynb" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -12,9 +15,10 @@
     <session id="183049760">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="3" />
+          <entry key="project.closed" value="4" />
           <entry key="project.open.time.0" value="3" />
-          <entry key="project.opened" value="3" />
+          <entry key="project.open.time.3" value="1" />
+          <entry key="project.opened" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -45,11 +49,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/GridWorld/gridWorld.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1955">
-              <caret line="115" column="17" selection-start-line="115" selection-start-column="17" selection-end-line="115" selection-end-column="17" />
+            <state relative-caret-position="-365">
+              <caret line="101" column="10" selection-start-line="101" selection-start-column="10" selection-end-line="101" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -57,17 +61,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GridWorld/gridWorld_Q.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="305">
+            <state relative-caret-position="2941">
               <caret line="173" column="22" selection-start-line="173" selection-start-column="22" selection-end-line="173" selection-end-column="22" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TicTacToe/ticTacToe.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="468">
-              <caret line="277" lean-forward="true" selection-start-line="277" selection-end-line="277" />
+            <state relative-caret-position="390">
+              <caret line="277" selection-start-line="277" selection-end-line="277" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
                 <element signature="e#5978#7942#0" />
@@ -126,7 +130,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -143,6 +146,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -161,7 +165,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.ticTacToe">
+  <component name="RunManager" selected="Python.gridWorld">
     <configuration name="gridWorld" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="RL" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -232,9 +236,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.gridWorld" />
         <item itemvalue="Python.ticTacToe" />
         <item itemvalue="Python.gridWorld_Q" />
-        <item itemvalue="Python.gridWorld" />
       </list>
     </recent_temporary>
   </component>
@@ -253,6 +257,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="78" y="22" width="1316" height="817" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24787645" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -267,7 +272,7 @@
       <window_info anchor="bottom" id="Docker" order="7" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.32905984" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.32905984" />
       <window_info anchor="bottom" id="Python Console" order="11" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -285,28 +290,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GridWorld/gridWorld.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1955">
-          <caret line="115" column="17" selection-start-line="115" selection-start-column="17" selection-end-line="115" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/GridWorld/gridWorld_Q.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="305">
+        <state relative-caret-position="2941">
           <caret line="173" column="22" selection-start-line="173" selection-start-column="22" selection-end-line="173" selection-end-column="22" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/TicTacToe/ticTacToe.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="277" lean-forward="true" selection-start-line="277" selection-end-line="277" />
+        <state relative-caret-position="390">
+          <caret line="277" selection-start-line="277" selection-end-line="277" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
             <element signature="e#5978#7942#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GridWorld/gridWorld.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-365">
+          <caret line="101" column="10" selection-start-line="101" selection-start-column="10" selection-end-line="101" selection-end-column="10" />
         </state>
       </provider>
     </entry>
