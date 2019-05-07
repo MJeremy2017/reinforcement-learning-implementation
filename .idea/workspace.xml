@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7712165c-0da5-4644-9518-9ee18f8924da" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/GridWorld/GridWorld.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/GridWorld/GridWorld.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Multi-ArmBandit/Bandit.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Multi-ArmBandit/Bandit.ipynb" afterDir="false" />
-    </list>
+    <list default="true" id="7712165c-0da5-4644-9518-9ee18f8924da" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,45 +12,57 @@
     <session id="183049760">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="4" />
+          <entry key="project.closed" value="5" />
           <entry key="project.open.time.0" value="3" />
-          <entry key="project.open.time.3" value="1" />
-          <entry key="project.opened" value="4" />
+          <entry key="project.open.time.3" value="2" />
+          <entry key="project.opened" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="gitignore" value="4" />
-          <entry key="py" value="3" />
+          <entry key="py" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="PLAIN_TEXT" value="4" />
-          <entry key="Python" value="3" />
+          <entry key="Python" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="gitignore" value="45" />
-          <entry key="py" value="400" />
+          <entry key="py" value="454" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="45" />
-          <entry key="Python" value="400" />
+          <entry key="Python" value="454" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GridWorld/gridWorld.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-365">
+            <state relative-caret-position="17">
               <caret line="101" column="10" selection-start-line="101" selection-start-column="10" selection-end-line="101" selection-end-column="10" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Multi-ArmBandit/bandit.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-161">
+              <caret line="59" lean-forward="true" selection-start-line="59" selection-end-line="59" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -70,7 +79,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TicTacToe/ticTacToe.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
+            <state relative-caret-position="3774">
               <caret line="277" selection-start-line="277" selection-end-line="277" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
@@ -99,6 +108,7 @@
         <option value="$PROJECT_DIR$/GridWorld/gridWorld_Q.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/TicTacToe/ticTacToe.py" />
+        <option value="$PROJECT_DIR$/Multi-ArmBandit/bandit.py" />
       </list>
     </option>
   </component>
@@ -140,6 +150,11 @@
             <path>
               <item name="RL" type="b2602c69:ProjectViewProjectNode" />
               <item name="RL" type="462c0819:PsiDirectoryNode" />
+              <item name="Multi-ArmBandit" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RL" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RL" type="462c0819:PsiDirectoryNode" />
               <item name="TicTacToe" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -165,7 +180,28 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.gridWorld">
+  <component name="RunManager" selected="Python.bandit">
+    <configuration name="bandit" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="RL" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Multi-ArmBandit" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Multi-ArmBandit/bandit.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="gridWorld" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="RL" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -233,9 +269,11 @@
       <item itemvalue="Python.gridWorld" />
       <item itemvalue="Python.gridWorld_Q" />
       <item itemvalue="Python.ticTacToe" />
+      <item itemvalue="Python.bandit" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.bandit" />
         <item itemvalue="Python.gridWorld" />
         <item itemvalue="Python.ticTacToe" />
         <item itemvalue="Python.gridWorld_Q" />
@@ -290,6 +328,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/GridWorld/gridWorld.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="101" column="10" selection-start-line="101" selection-start-column="10" selection-end-line="101" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/GridWorld/gridWorld_Q.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2941">
@@ -299,7 +344,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/TicTacToe/ticTacToe.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
+        <state relative-caret-position="3774">
           <caret line="277" selection-start-line="277" selection-end-line="277" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
@@ -308,10 +353,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GridWorld/gridWorld.py">
+    <entry file="file://$PROJECT_DIR$/Multi-ArmBandit/bandit.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-365">
-          <caret line="101" column="10" selection-start-line="101" selection-start-column="10" selection-end-line="101" selection-end-column="10" />
+        <state relative-caret-position="-161">
+          <caret line="59" lean-forward="true" selection-start-line="59" selection-end-line="59" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
