@@ -12,7 +12,10 @@ class BlackJackSolution:
                 for k in [True, False]:
                     self.player_Q_Values[(i, j, k)] = {}
                     for a in [1, 0]:
-                        self.player_Q_Values[(i, j, k)][a] = 0
+                        if (i == 21) and (a == 0):
+                            self.player_Q_Values[(i, j, k)][a] = 1
+                        else:
+                            self.player_Q_Values[(i, j, k)][a] = 0
 
         self.player_state_action = []
         self.state = (0, 0, False)  # initial state
@@ -55,6 +58,7 @@ class BlackJackSolution:
 
         if np.random.uniform(0, 1) <= self.exp_rate:
             action = np.random.choice(self.actions)
+        #             print("random action", action)
         else:
             # greedy action
             v = -999
@@ -63,6 +67,7 @@ class BlackJackSolution:
                 if self.player_Q_Values[self.state][a] > v:
                     action = a
                     v = self.player_Q_Values[self.state][a]
+        #             print("greedy action", action)
         return action
 
     # one can only has 1 usable ace
@@ -72,16 +77,8 @@ class BlackJackSolution:
         show_card = self.state[1]
         usable_ace = self.state[2]
 
-        if current_value > 21:
-            if usable_ace:
-                current_value -= 10
-                usable_ace = False
-            else:
-                # should not reach here
-                self.end = True
-                self.state = (current_value, show_card, usable_ace)
-                return
         if action:
+            # action hit
             card = self.giveCard()
             if card == 1:
                 if current_value <= 10:
@@ -94,31 +91,42 @@ class BlackJackSolution:
         else:
             # action stand
             self.end = True
+            return (current_value, show_card, usable_ace)
 
         if current_value > 21:
-            self.end = True
-        self.state = (current_value, show_card, usable_ace)
-
-    def _giveCredit(self, player_value, dealer_value, is_end=True):
-        reward = 0
-        if is_end:
-            if player_value > 21:
-                if dealer_value > 21:
-                    # draw
-                    reward = 0
-                else:
-                    reward = -1
+            if usable_ace:
+                current_value -= 10
+                usable_ace = False
             else:
-                if dealer_value > 21:
-                    reward = 1
+                self.end = True
+                return (current_value, show_card, usable_ace)
+
+        return (current_value, show_card, usable_ace)
+
+    def winner(self, player_value, dealer_value):
+        # player 1 | draw 0 | dealer -1
+        winner = 0
+        if player_value > 21:
+            if dealer_value > 21:
+                # draw
+                winner = 0
+            else:
+                winner = -1
+        else:
+            if dealer_value > 21:
+                winner = 1
+            else:
+                if player_value < dealer_value:
+                    winner = -1
+                elif player_value > dealer_value:
+                    winner = 1
                 else:
-                    if player_value < dealer_value:
-                        reward = -1
-                    elif player_value > dealer_value:
-                        reward = 1
-                    else:
-                        # draw
-                        reward = 0
+                    # draw
+                    winner = 0
+        return winner
+
+    def _giveCredit(self, player_value, dealer_value):
+        reward = self.winner(player_value, dealer_value)
         # backpropagate reward
         for s in reversed(self.player_state_action):
             state, action = s[0], s[1]
@@ -130,43 +138,63 @@ class BlackJackSolution:
         self.state = (0, 0, False)  # initial state
         self.end = False
 
+    def deal2cards(self, show=False):
+        # return value after 2 cards and usable ace
+        value, usable_ace = 0, False
+        cards = [self.giveCard(), self.giveCard()]
+        if 1 in cards:
+            value = sum(cards) + 10
+            usable_ace = True
+        else:
+            value = sum(cards)
+            usable_ace = False
+
+        if show:
+            return value, usable_ace, cards[0]
+        else:
+            return value, usable_ace
+
     def play(self, rounds=1000):
         for i in range(rounds):
             if i % 1000 == 0:
                 print("round", i)
-            # hit 2 cards each
-            dealer_value, player_value = 0, 0
-            show_card = 0
 
-            # give dealer 2 cards and show 1
-            dealer_value += self.giveCard()
-            show_card = dealer_value
-            self.state = (0, show_card, False)
-            dealer_value += self.giveCard()
+            # give 2 cards
+            dealer_value, d_usable_ace, show_card = self.deal2cards(show=True)
+            player_value, p_usable_ace = self.deal2cards(show=False)
 
-            # player's turn
-            usable_ace, is_end = False, False
-            while True:
-                action = self.chooseAction()
-                # print("current value {}, action {}".format(self.state[0], action))
-                if self.state[0] >= 12:
-                    self.player_state_action.append([self.state, action])
-                # update next state
-                self.playerNxtState(action)
-                if self.end:
-                    break
+            self.state = (player_value, show_card, p_usable_ace)
+            print("init", self.state)
 
-                    # dealer's turn
-            usable_ace, is_end = False, False
-            while not is_end:
-                dealer_value, usable_ace, is_end = self.dealerPolicy(dealer_value, usable_ace, is_end)
-            # print("dealer card sum", dealer_value)
+            # judge winner after 2 cards
+            if player_value == 21 or dealer_value == 21:
+                # game end
+                # print("reach 21 in 2 cards: player value {} | dealer value {}".format(player_value, dealer_value))
+                next
+            else:
+                while True:
+                    action = self.chooseAction()  # state -> action
+                    # print("current value {}, action {}".format(self.state[0], action))
+                    if self.state[0] >= 12:
+                        state_action_pair = [self.state, action]
+                        # print(state_action_pair)
+                        self.player_state_action.append(state_action_pair)
+                    # update next state
+                    self.state = self.playerNxtState(action)
+                    if self.end:
+                        break
 
-            # judge winner
-            # give reward and update Q value
-            player_value = self.state[0]
-            print("player value {} | dealer value {}".format(player_value, dealer_value))
-            self._giveCredit(player_value, dealer_value)
+                        # dealer's turn
+                is_end = False
+                while not is_end:
+                    dealer_value, d_usable_ace, is_end = self.dealerPolicy(dealer_value, d_usable_ace, is_end)
+
+                # judge winner
+                # give reward and update Q value
+                player_value = self.state[0]
+                print("player value {} | dealer value {}".format(player_value, dealer_value))
+                self._giveCredit(player_value, dealer_value)
+            # print("player state action", self.player_state_action)
             self.reset()
 
     def savePolicy(self, file="policy"):
@@ -188,48 +216,44 @@ class BlackJackSolution:
         result = np.zeros(3)  # player [win, draw, lose]
         for _ in range(rounds):
             # hit 2 cards each
-            dealer_value, player_value = 0, 0
-            show_card = 0
+            # give 2 cards
+            dealer_value, d_usable_ace, show_card = self.deal2cards(show=True)
+            player_value, p_usable_ace = self.deal2cards(show=False)
 
-            # give dealer 2 cards and show 1
-            dealer_value += self.giveCard()
-            show_card = dealer_value
-            self.state = (0, show_card, False)
-            dealer_value += self.giveCard()
+            self.state = (player_value, show_card, p_usable_ace)
 
-            # player's turn
-            while True:
-                action = self.chooseAction()
-                # update next state
-                self.playerNxtState(action)
-                if self.end:
-                    break
-
-                    # dealer's turn
-            usable_ace, is_end = False, False
-            while not is_end:
-                dealer_value, usable_ace, is_end = self.dealerPolicy(dealer_value, usable_ace, is_end)
-
-            # judge
-            player_value = self.state[0]
-            # print("player value {} | dealer value {}".format(player_value, dealer_value))
-            if player_value > 21:
-                if dealer_value > 21:
-                    # draw
+            # judge winner after 2 cards
+            if player_value == 21 or dealer_value == 21:
+                if player_value == dealer_value:
                     result[1] += 1
+                elif player_value > dealer_value:
+                    result[0] += 1
                 else:
                     result[2] += 1
             else:
-                if dealer_value > 21:
+                # player's turn
+                while True:
+                    action = self.chooseAction()
+                    # update next state
+                    self.state = self.playerNxtState(action)
+                    if self.end:
+                        break
+
+                        # dealer's turn
+                is_end = False
+                while not is_end:
+                    dealer_value, d_usable_ace, is_end = self.dealerPolicy(dealer_value, d_usable_ace, is_end)
+
+                # judge
+                player_value = self.state[0]
+                # print("player value {} | dealer value {}".format(player_value, dealer_value))
+                w = self.winner(player_value, dealer_value)
+                if w == 1:
                     result[0] += 1
+                elif w == 0:
+                    result[1] += 1
                 else:
-                    if player_value < dealer_value:
-                        result[2] += 1
-                    elif player_value > dealer_value:
-                        result[0] += 1
-                    else:
-                        # draw
-                        result[1] += 1
+                    result[2] += 1
             self.reset()
         return result
 
