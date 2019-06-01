@@ -17,3 +17,4 @@ Where in the note book records all the intermediate process and plots, in the py
 
 ## Muilti-Arm Bandit
 - [Muilti-Arm Bandit Implementation](https://medium.com/@zhangyue9306/reinforcement-learning-multi-arm-bandit-implementation-5399ef67b24b)
+
