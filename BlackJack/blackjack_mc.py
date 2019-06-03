@@ -160,7 +160,7 @@ if __name__ == "__main__":
     z2 = [v for v in nonusable_ace.values()]
     ax2.scatter(x2, y2, z2)
 
-    ax2.set_title("usable ace")
+    ax2.set_title("non-usable ace")
     ax2.set_xlabel("dealer showing")
     ax2.set_ylabel("player sum")
     ax2.set_zlabel("reward")
