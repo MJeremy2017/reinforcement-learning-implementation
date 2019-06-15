@@ -130,8 +130,8 @@ class BlackJackSolution:
         # backpropagate reward
         for s in reversed(self.player_state_action):
             state, action = s[0], s[1]
-            reward = self.lr * (reward - self.player_Q_Values[state][action])
-            self.player_Q_Values[state][action] += reward
+            reward = self.player_Q_Values[state][action] + self.lr*(reward - self.player_Q_Values[state][action])
+            self.player_Q_Values[state][action] = round(reward, 3)
 
     def reset(self):
         self.player_state_action = []
@@ -169,15 +169,12 @@ class BlackJackSolution:
             # judge winner after 2 cards
             if player_value == 21 or dealer_value == 21:
                 # game end
-                # print("reach 21 in 2 cards: player value {} | dealer value {}".format(player_value, dealer_value))
                 next
             else:
                 while True:
                     action = self.chooseAction()  # state -> action
-                    # print("current value {}, action {}".format(self.state[0], action))
                     if self.state[0] >= 12:
                         state_action_pair = [self.state, action]
-                        # print(state_action_pair)
                         self.player_state_action.append(state_action_pair)
                     # update next state
                     self.state = self.playerNxtState(action)
@@ -194,7 +191,7 @@ class BlackJackSolution:
                 player_value = self.state[0]
                 print("player value {} | dealer value {}".format(player_value, dealer_value))
                 self._giveCredit(player_value, dealer_value)
-            # print("player state action", self.player_state_action)
+  
             self.reset()
 
     def savePolicy(self, file="policy"):
