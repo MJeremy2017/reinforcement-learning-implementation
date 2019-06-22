@@ -142,18 +142,40 @@ class Agent:
             self.reset()
 
 
+def showRoute(states):
+    board = np.zeros([4, 12])
+    # add cliff marked as -1
+    board[3, 1:11] = -1
+    for i in range(0, ROWS):
+        print('-------------------------------------------------')
+        out = '| '
+        for j in range(0, COLS):
+            token = '0'
+            if board[i, j] == -1:
+                token = '*'
+            if (i, j) in states:
+                token = 'R'
+            if (i, j) == G:
+                token = 'G'
+            out += token + ' | '
+        print(out)
+    print('-------------------------------------------------') 
+
+
 if __name__ == "__main__":
     print("sarsa training ... ")
     ag = Agent(exp_rate=0.1, sarsa=True)
-    ag.play(rounds=300)
+    ag.play(rounds=500)
 
     # Sarsa
     ag_op = Agent(exp_rate=0)
     ag_op.state_actions = ag.state_actions
 
+    states = []
     while 1:
         curr_state = ag_op.pos
         action = ag_op.chooseAction()
+        states.append(curr_state)
         print("current position {} |action {}".format(curr_state, action))
 
         # next position
@@ -163,17 +185,21 @@ if __name__ == "__main__":
         if ag_op.cliff.end:
             break
 
+    showRoute(states)
+
     print("q-learning training ... ")
     ag = Agent(exp_rate=0.1, sarsa=False)
-    ag.play(rounds=300)
+    ag.play(rounds=500)
 
     # Q-learning
     ag_op = Agent(exp_rate=0)
     ag_op.state_actions = ag.state_actions
 
+    states = []
     while 1:
         curr_state = ag_op.pos
         action = ag_op.chooseAction()
+        states.append(curr_state)
         print("current position {} |action {}".format(curr_state, action))
 
         # next position
@@ -182,3 +208,5 @@ if __name__ == "__main__":
 
         if ag_op.cliff.end:
             break
+
+    showRoute(states)
