@@ -16,7 +16,6 @@ class RandomWalk:
         self.n = n
         self.lr = lr
         self.gamma = gamma
-        self.state_actions = []
         self.debug = debug
         # init q estimates
         self.Q_values = {}
