@@ -84,10 +84,8 @@ class DynaAgent:
         for row in range(ROWS):
             for col in range(COLS):
                 self.Q_values[(row, col)] = {}
-                self.model[(row, col)] = {}
                 for a in self.actions:
                     self.Q_values[(row, col)][a] = 0
-                    self.model[(row, col)][a] = (0, (0, 0))  # reward & next state
         
     def chooseAction(self):
         # epsilon-greedy
@@ -130,6 +128,7 @@ class DynaAgent:
                 self.Q_values[self.state][action] += self.lr*(reward + np.max(list(self.Q_values[nxtState].values())) - self.Q_values[self.state][action])
 
                 # update model
+                self.model[self.state] = {}
                 self.model[self.state][action] = (reward, nxtState)
                 self.state = nxtState
 
