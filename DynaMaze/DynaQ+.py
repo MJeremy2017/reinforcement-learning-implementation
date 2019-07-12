@@ -85,10 +85,8 @@ class DynaAgentPlus:
         for row in range(ROWS):
             for col in range(COLS):
                 self.Q_values[(row, col)] = {}
-                self.model[(row, col)] = {}
                 for a in self.actions:
                     self.Q_values[(row, col)][a] = 0
-                    self.model[(row, col)][a] = (0, (0, 0), 0)  # reward & next state & #times been tried
 
     def chooseAction(self):
         # epsilon-greedy
@@ -115,16 +113,18 @@ class DynaAgentPlus:
         self.maze = Maze()
         self.state = S
         self.state_actions = []
+        self.time = 0
 
-    def updateModel(self, state, action, reward):
+    def updateModel(self, state, nxtState, action, reward):
+        if state not in self.model.keys():
+            self.model[state] = {}
         for a in self.actions:
             # the initial model for such actions was that they would
             # lead back to the same state with a reward of 0.
             if a != action:
-                _, _, time = self.model[state][a]
-                self.model[state][a] = (0, state, time)  # time remains the same
-        time = self.model[state][action][2]
-        self.model[state][action] = (reward, nxtState, time + 1)
+                self.model[state][a] = (0, state, 1)
+
+        self.model[state][action] = (reward, nxtState, self.time)
 
     def play(self):
         self.steps_per_episode = []
@@ -137,22 +137,12 @@ class DynaAgentPlus:
 
                 nxtState = self.maze.nxtPosition(action)
                 reward = self.maze.giveReward()
-                #                 print("nxt", nxtState, self.state)
+
                 # update Q-value
-                self.Q_values[self.state][action] += self.lr * (
-                            reward + np.max(list(self.Q_values[nxtState].values())) - self.Q_values[self.state][action])
+                self.Q_values[self.state][action] += self.lr * (reward + np.max(list(self.Q_values[nxtState].values())) - self.Q_values[self.state][action])
 
                 # update model
-                for a in self.actions:
-                    # the initial model for such actions was that they would
-                    # lead back to the same state with a reward of 0.
-                    if a != action:
-                        time = self.model[self.state][a][2]
-                        self.model[self.state][a] = (0, self.state, time)  # time remains the same
-
-                time = self.model[self.state][action][2]
-                self.model[self.state][action] = (reward, nxtState, time + 1)
-
+                self.updateModel(self.state, nxtState, action, reward)
                 self.state = nxtState
                 self.time += 1
 
@@ -169,11 +159,13 @@ class DynaAgentPlus:
                     # update _reward
                     _reward += self.timeWeight * np.sqrt(self.time - _time)
 
-                    self.Q_values[_state][_action] += self.lr * (
-                                _reward + np.max(list(self.Q_values[_nxtState].values())) - self.Q_values[_state][
-                            _action])
-                    # end of game
+                    self.Q_values[_state][_action] += self.lr * (_reward + np.max(list(self.Q_values[_nxtState].values())) - self.Q_values[_state][_action])
+            # end of game
             if ep % 10 == 0:
                 print("episode", ep)
             self.steps_per_episode.append(len(self.state_actions))
             self.reset()
+
+if __name__ == "__main__":
+    dap = DynaAgentPlus()
+    dap.play()
