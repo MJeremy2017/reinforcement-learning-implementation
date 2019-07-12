@@ -127,7 +127,7 @@ class DynaAgent:
                 # update Q-value
                 self.Q_values[self.state][action] += self.lr*(reward + np.max(list(self.Q_values[nxtState].values())) - self.Q_values[self.state][action])
 
-                # update model & predecessors
+                # update model
                 if self.state not in self.model.keys():
                     self.model[self.state] = {}
                 self.model[self.state][action] = (reward, nxtState)
