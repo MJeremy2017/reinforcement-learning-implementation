@@ -84,10 +84,8 @@ class PriorityAgent:
         for row in range(ROWS):
             for col in range(COLS):
                 self.Q_values[(row, col)] = {}
-                self.model[(row, col)] = {}
                 for a in self.actions:
                     self.Q_values[(row, col)][a] = 0
-                    self.model[(row, col)][a] = (0, (0, 0))  # reward & next state
 
         # for priority sweeping
         self.theta = theta
@@ -134,12 +132,12 @@ class PriorityAgent:
                 tmp_diff = reward + np.max(list(self.Q_values[nxtState].values())) - self.Q_values[self.state][action]
                 if tmp_diff > self.theta:
                     self.queue.put((-tmp_diff, (self.state, action)))  # -diff -> (state, action) pop the smallest
-                self.Q_values[self.state][action] += self.lr * tmp_diff
 
                 # update model & predecessors
+                if self.state not in self.model.keys():
+                    self.model[self.state] = {}
                 self.model[self.state][action] = (reward, nxtState)
                 if nxtState not in self.predecessors.keys():
-                    # print("nxtState {} state {} action {}".format(nxtState, self.state, action))
                     self.predecessors[nxtState] = [(self.state, action)]
                 else:
                     self.predecessors[nxtState].append((self.state, action))
@@ -151,9 +149,7 @@ class PriorityAgent:
                         break
                     _state, _action = self.queue.get()[1]
                     _reward, _nxtState = self.model[_state][_action]
-                    self.Q_values[_state][_action] += self.lr * (
-                                _reward + np.max(list(self.Q_values[_nxtState].values())) - self.Q_values[_state][
-                            _action])
+                    self.Q_values[_state][_action] += self.lr * (_reward + np.max(list(self.Q_values[_nxtState].values())) - self.Q_values[_state][_action])
 
                     # loop for all state, action predicted lead to _state
                     if _state not in self.predecessors.keys():
@@ -162,8 +158,7 @@ class PriorityAgent:
 
                     for (pre_state, pre_action) in pre_state_action_list:
                         pre_reward, _ = self.model[pre_state][pre_action]
-                        pre_tmp_diff = pre_reward + np.max(list(self.Q_values[_state].values())) - \
-                                       self.Q_values[pre_state][pre_action]
+                        pre_tmp_diff = pre_reward + np.max(list(self.Q_values[_state].values())) - self.Q_values[pre_state][pre_action]
                         if pre_tmp_diff > self.theta:
                             self.queue.put((-pre_tmp_diff, (pre_state, pre_action)))
             # end of game
@@ -171,3 +166,8 @@ class PriorityAgent:
                 print("episode", ep)
             self.steps_per_episode.append(len(self.state_actions))
             self.reset()
+
+
+if __name__ == "__main__":
+    pa = PriorityAgent()
+    pa.play()

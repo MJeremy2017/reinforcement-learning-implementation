@@ -166,6 +166,7 @@ class DynaAgentPlus:
             self.steps_per_episode.append(len(self.state_actions))
             self.reset()
 
+
 if __name__ == "__main__":
     dap = DynaAgentPlus()
     dap.play()
