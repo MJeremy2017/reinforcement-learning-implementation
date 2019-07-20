@@ -28,3 +28,10 @@ Where in the note book records all the intermediate process and plots, in the py
 
 ## Random Walk(n-step TD method)
 - [Random Walk Implementation](https://medium.com/@zhangyue9306/n-step-td-method-157d3875b9cb)
+
+## DynaMaze
+- [DynaMaze Implementation](https://towardsdatascience.com/reinforcement-learning-model-based-planning-methods-5e99cae0abb8)
+- [DynaMaze Extensions Implementation](https://towardsdatascience.com/reinforcement-learning-model-based-planning-methods-extension-572dfee4cceb)
+
+## Random Walk(General)
+- [1000-State Random Walk](https://medium.com/@zhangyue9306/reinforcement-learning-generalisation-in-continuous-state-space-df943b04ebfa)
