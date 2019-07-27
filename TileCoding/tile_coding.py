@@ -84,5 +84,4 @@ class QValueFunction:
 
         for coding, q_table in zip(state_codings, self.q_tables):
             delta = target - q_table[tuple(coding) + (action_idx,)]
-            #             print("target {} delta {}".format(target, delta))
             q_table[tuple(coding) + (action_idx,)] += self.lr * (delta)
