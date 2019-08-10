@@ -116,7 +116,6 @@ class ServerAcess:
         cur_action = self.chooseAction(valueFunc)  # n free server is also updated
 
         total_reward = 0
-        rewards = []
         for i in range(1, steps + 1):
             reward = self.giveReward(cur_action)
             new_state = self.nxtState(cur_action)
@@ -136,7 +135,6 @@ class ServerAcess:
 
             cur_state = new_state
             cur_action = new_action
-        return rewards
 
 
 if __name__ == "__main__":
