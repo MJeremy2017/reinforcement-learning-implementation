@@ -1,4 +1,4 @@
-# RL
+# Reinforcement Learning Algorithms Implementation
 ---
 Reinforcement Learning Examples
 
