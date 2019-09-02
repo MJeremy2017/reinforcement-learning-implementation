@@ -35,3 +35,18 @@ Where in the note book records all the intermediate process and plots, in the py
 
 ## Random Walk(General)
 - [1000-State Random Walk](https://medium.com/@zhangyue9306/reinforcement-learning-generalisation-in-continuous-state-space-df943b04ebfa)
+
+## Tile Coding
+- [Tile Coding Implementation](https://towardsdatascience.com/reinforcement-learning-tile-coding-implementation-7974b600762b)
+
+## Mountain Car
+- [On-policy Function Approximation](https://towardsdatascience.com/reinforcement-learning-on-policy-function-approximation-2f47576f772d)
+
+## Server Access
+- [Generalisation on Continuing Tasks](https://towardsdatascience.com/reinforcement-learning-generalisation-on-continuing-tasks-ffb9a89d57d0)
+
+## Baird Counter Example
+- [Generalisation of Off-Policy Learning](https://towardsdatascience.com/reinforcement-learning-generalisation-of-off-policy-learning-61468b0bc138)
+
+## TD(\lambda)
+- [Random Walk Lambda](https://towardsdatascience.com/reinforcement-learning-td-%CE%BB-introduction-686a5e4f4e60)
