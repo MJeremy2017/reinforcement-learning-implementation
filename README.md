@@ -46,6 +46,9 @@ Where in the note book records all the intermediate process and plots, in the py
 ## Baird Counter Example
 - [Generalisation of Off-Policy Learning](https://towardsdatascience.com/reinforcement-learning-generalisation-of-off-policy-learning-61468b0bc138)
 
-## TD(\lambda)
+## TD-Lambda
 - [Random Walk offline-Lambda](https://towardsdatascience.com/reinforcement-learning-td-%CE%BB-introduction-686a5e4f4e60)
 - [Random Walk TD(\lambda)](https://medium.com/@zhangyue9306/reinforcement-learning-td-%CE%BB-introduction-2-f0ea427cd395)
+
+## Mountain Car-Lambda
+
