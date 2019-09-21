@@ -17,6 +17,13 @@ class ShortCorridor:
         h = np.dot(self.theta, self.x)
         prob = self.softmax(h)  # left, right probability for all state
 
+        imin = np.argmin(prob)
+        epsilon = 0.05
+
+        if prob[imin] < epsilon:
+            prob[:] = 1 - epsilon
+            prob[imin] = epsilon
+
         action = np.random.choice(self.actions, p=prob)
         return action
 
