@@ -18,7 +18,7 @@ class ShortCorridor:
         prob = self.softmax(h)  # left, right probability for all state
 
         action = np.random.choice(self.actions, p=prob)
-        return action, prob
+        return action
 
     def takeAction(self, action):
         if self.state == 0:
@@ -45,7 +45,7 @@ class ShortCorridor:
         for i in range(1, rounds + 1):
             reward_sum = 0
             while True:
-                action, prob = self.chooseAction()
+                action = self.chooseAction()
                 nxtState = self.takeAction(action)
                 reward = self.giveReward()
                 reward_sum += reward
@@ -76,13 +76,12 @@ class ShortCorridor:
 
                     if i % 50 == 0:
                         print("round {}: current prob {} reward {}".format(i, prob, reward_sum))
-                        reward_sum = 0
                     break
 
 
 if __name__ == "__main__":
     sc = ShortCorridor(alpha=2e-4, gamma=1)
-    sc.run(1000)
+    sc.run(2000)
 
     h = np.dot(sc.theta, sc.x)
     print(sc.softmax(h))  # left, right probability for all state
