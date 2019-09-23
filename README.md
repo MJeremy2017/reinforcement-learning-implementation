@@ -52,3 +52,6 @@ Where in the note book records all the intermediate process and plots, in the py
 
 ## Mountain Car-Lambda
 - [Sarsa-Lambda](https://towardsdatascience.com/reinforcement-learning-td-%CE%BB-introduction-3-f329bdbf872a)
+
+## Policy Approximation
+
