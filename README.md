@@ -54,4 +54,4 @@ Where in the note book records all the intermediate process and plots, in the py
 - [Sarsa-Lambda](https://towardsdatascience.com/reinforcement-learning-td-%CE%BB-introduction-3-f329bdbf872a)
 
 ## Policy Approximation
-
+- [Short-Corridor](https://towardsdatascience.com/reinforcement-learning-policy-approximation-f5606ad3d909)
