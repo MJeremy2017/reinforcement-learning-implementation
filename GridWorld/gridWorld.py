@@ -48,8 +48,8 @@ class State:
             else:
                 nxtState = (self.state[0], self.state[1] + 1)
             # if next state legal
-            if (nxtState[0] >= 0) and (nxtState[0] <= 2):
-                if (nxtState[1] >= 0) and (nxtState[1] <= 3):
+            if (nxtState[0] >= 0) and (nxtState[0] <= (BOARD_ROWS -1)):
+                if (nxtState[1] >= 0) and (nxtState[1] <= (BOARD_COLS -1):
                     if nxtState != (1, 1):
                         return nxtState
             return self.state
