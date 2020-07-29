@@ -25,19 +25,18 @@ class Bandit:
 
     def chooseAction(self):
         # explore
-        if np.random.uniform(0, 1) <= self.exp_rate:
-            action = np.random.choice(self.actions)
-        else:
-            # exploit
-            if self.ucb:
-                if self.times == 0:
-                    action = np.random.choice(self.actions)
-                else:
-                    confidence_bound = self.values + self.c * np.sqrt(
-                        np.log(self.times) / (self.action_times + 0.1))  # c=2
-                    action = np.argmax(confidence_bound)
+        if self.ucb:
+            if self.times == 0:
+                action = np.random.choice(self.actions)
+            else:   #  Even after a good value found, after many trials, UCB of this action might become lower than the lesser values, leading to retrying those again.
+                confidence_bound = self.values + self.c * np.sqrt(
+                    np.log(self.times) / (self.action_times + 0.1))  # c=2
+                action = np.argmax(confidence_bound)
+        else:   #  epsilon greedy
+            if np.random.uniform(0, 1) <= self.exp_rate: # explore
+                action = np.random.choice(self.actions)
             else:
-                action = np.argmax(self.values)
+                action = np.argmax(self.values) # exploit
         return action
 
     def takeAction(self, action):
