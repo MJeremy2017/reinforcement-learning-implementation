@@ -3,7 +3,12 @@ import pickle
 
 BOARD_ROWS = 3
 BOARD_COLS = 3
-
+NUM_DIAG = abs(BOARD_ROWS-BOARD_COLS)+1
+if (BOARD_ROWS < BOARD_COLS):
+  WINNING_COUNT_DIAG = BOARD_ROWS
+else:
+  WINNING_COUNT_DIAG = BOARD_COLS
+ 
 
 class State:
     def __init__(self, p1, p2):
@@ -23,30 +28,45 @@ class State:
     def winner(self):
         # row
         for i in range(BOARD_ROWS):
-            if sum(self.board[i, :]) == 3:
+            if sum(self.board[i, :]) == BOARD_COLS:
                 self.isEnd = True
                 return 1
-            if sum(self.board[i, :]) == -3:
+            if sum(self.board[i, :]) == (-1 * BOARD_COLS):
                 self.isEnd = True
                 return -1
         # col
         for i in range(BOARD_COLS):
-            if sum(self.board[:, i]) == 3:
+            if sum(self.board[:, i]) == BOARD_ROWS:
                 self.isEnd = True
                 return 1
-            if sum(self.board[:, i]) == -3:
+            if sum(self.board[:, i]) == (-1 * BOARD_ROWS):
                 self.isEnd = True
                 return -1
-        # diagonal
-        diag_sum1 = sum([self.board[i, i] for i in range(BOARD_COLS)])
-        diag_sum2 = sum([self.board[i, BOARD_COLS - i - 1] for i in range(BOARD_COLS)])
-        diag_sum = max(abs(diag_sum1), abs(diag_sum2))
-        if diag_sum == 3:
+
+        # diag
+        for i in range(NUM_DIAG):
+          if (BOARD_ROWS < BOARD_COLS):
+            # \ Diagonals 
+            # i selects offset from first diagonal
+            diag_sum1 = np.trace(self.board,i)
+            # / Diagonals
+            # Flip board so that we can calculate diagonals in other direction
+            diag_sum2 = np.trace((np.fliplr(self.board)),i)
+          else:
+            # / Diagonals
+            # Rotate 90 first, so that \ becomes /
+            # Note: In this case, offset 'i' starts from rightmost diagonal
+            diag_sum1 = np.trace((np.rot90(self.board)),i)
+            # \ Diagonals
+            # In this case we need to flip and then rotate!
+            diag_sum2 = np.trace((np.rot90(np.fliplr(self.board))),i)
+ 
+          if ((diag_sum1==WINNING_COUNT_DIAG) or (diag_sum2==WINNING_COUNT_DIAG)):
             self.isEnd = True
-            if diag_sum1 == 3 or diag_sum2 == 3:
-                return 1
-            else:
-                return -1
+            return 1
+          elif (diag_sum1==(-1 * WINNING_COUNT_DIAG) or (diag_sum2==(-1 * WINNING_COUNT_DIAG))):
+            self.isEnd = True
+            return -1
 
         # tie
         # no available positions
@@ -132,6 +152,8 @@ class State:
                         self.p2.reset()
                         self.reset()
                         break
+        self.p1.savePolicy()
+        self.p2.savePolicy()
 
     # play with human
     def play2(self):
@@ -170,19 +192,24 @@ class State:
 
     def showBoard(self):
         # p1: x  p2: o
-        for i in range(0, BOARD_ROWS):
-            print('-------------')
+        for i in range(0, (BOARD_ROWS+1)):
             out = '| '
             for j in range(0, BOARD_COLS):
-                if self.board[i, j] == 1:
-                    token = 'x'
-                if self.board[i, j] == -1:
-                    token = 'o'
-                if self.board[i, j] == 0:
-                    token = ' '
-                out += token + ' | '
-            print(out)
-        print('-------------')
+                print ('-', end='')
+                if (j==(BOARD_COLS-1)):
+                  print ('----')
+                else:
+                  print('---', end='')
+                if (i<BOARD_ROWS):
+                    if self.board[i, j] == 1:
+                        token = 'x'
+                    if self.board[i, j] == -1:
+                        token = 'o'
+                    if self.board[i, j] == 0:
+                        token = ' '
+                    out += token + ' | '
+            if (i<BOARD_ROWS):
+                print(out)
 
 
 class Player:
