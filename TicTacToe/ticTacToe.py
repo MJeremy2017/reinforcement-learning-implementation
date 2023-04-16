@@ -40,13 +40,13 @@ class State:
         # diagonal
         diag_sum1 = sum([self.board[i, i] for i in range(BOARD_COLS)])
         diag_sum2 = sum([self.board[i, BOARD_COLS - i - 1] for i in range(BOARD_COLS)])
-        diag_sum = max(abs(diag_sum1), abs(diag_sum2))
-        if diag_sum == 3:
+        # diag_sum = max(diag_sum1, diag_sum2)
+        if diag_sum1 == 3 or diag_sum2 == 3:
             self.isEnd = True
-            if diag_sum1 == 3 or diag_sum2 == 3:
-                return 1
-            else:
-                return -1
+            return 1
+        if diag_sum1 == -3 or diag_sum2 == -3:
+            self.isEnd = True
+            return -1
 
         # tie
         # no available positions
