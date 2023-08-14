@@ -272,6 +272,10 @@ if __name__ == "__main__":
     p1 = Player("p1")
     p2 = Player("p2")
 
+    # save models
+    p1.savePolicy()
+    p2.savePolicy()
+    
     st = State(p1, p2)
     print("training...")
     st.play(50000)
