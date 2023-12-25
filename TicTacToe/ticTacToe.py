@@ -7,7 +7,7 @@ BOARD_COLS = 3
 
 class State:
     def __init__(self, p1, p2):
-        self.board = np.zeros((BOARD_ROWS, BOARD_COLS))
+        self.board = np.zeros((BOARD_ROWS, BOARD_COLS), dtype = np.int32)
         self.p1 = p1
         self.p2 = p2
         self.isEnd = False
@@ -86,7 +86,7 @@ class State:
 
     # board reset
     def reset(self):
-        self.board = np.zeros((BOARD_ROWS, BOARD_COLS))
+        self.board = np.zeros((BOARD_ROWS, BOARD_COLS), dtype = np.int32)
         self.boardHash = None
         self.isEnd = False
         self.playerSymbol = 1
