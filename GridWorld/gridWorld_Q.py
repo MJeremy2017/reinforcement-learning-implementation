@@ -64,8 +64,8 @@ class State:
             nxtState = self.nxtPosition(action)
 
         # if next state is legal
-        if (nxtState[0] >= 0) and (nxtState[0] <= 2):
-            if (nxtState[1] >= 0) and (nxtState[1] <= 3):
+        if (nxtState[0] >= 0) and (nxtState[0] <= (BOARD_ROWS-1)):
+            if (nxtState[1] >= 0) and (nxtState[1] <= (BOARD_COLS-1)):
                 if nxtState != (1, 1):
                     return nxtState
         return self.state
