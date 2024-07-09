@@ -108,7 +108,7 @@ class Agent:
 
     def chooseAction(self):
         # choose action with most expected value
-        mx_nxt_reward = 0
+        mx_nxt_reward = -100
         action = ""
 
         if np.random.uniform(0, 1) <= self.exp_rate:
