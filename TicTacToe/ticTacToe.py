@@ -3,7 +3,7 @@ import pickle
 
 BOARD_ROWS = 3
 BOARD_COLS = 3
-
+train = False
 
 class State:
     def __init__(self, p1, p2):
@@ -39,14 +39,22 @@ class State:
                 return -1
         # diagonal
         diag_sum1 = sum([self.board[i, i] for i in range(BOARD_COLS)])
-        diag_sum2 = sum([self.board[i, BOARD_COLS - i - 1] for i in range(BOARD_COLS)])
-        diag_sum = max(abs(diag_sum1), abs(diag_sum2))
-        if diag_sum == 3:
+        diag_sum2 = sum([self.board[i, BOARD_COLS-i-1] for i in range(BOARD_COLS)])
+        if diag_sum1 == 3 or diag_sum2 == 3:
             self.isEnd = True
-            if diag_sum1 == 3 or diag_sum2 == 3:
-                return 1
-            else:
-                return -1
+            return 1
+        if diag_sum1 == -3 or diag_sum2 == -3:
+            self.isEnd = True
+            return -1
+        
+        # tie
+        # no available positions
+        if len(self.availablePositions()) == 0:
+            self.isEnd = True
+            return 0
+        # not end
+        self.isEnd = False
+        return None
 
         # tie
         # no available positions
@@ -179,10 +187,13 @@ class State:
                 if self.board[i, j] == -1:
                     token = 'o'
                 if self.board[i, j] == 0:
-                    token = ' '
+                    token = str(j+1 + i*3)
+
+
+
                 out += token + ' | '
             print(out)
-        print('-------------')
+        print('-------------')    
 
 
 class Player:
@@ -245,40 +256,57 @@ class Player:
 
 class HumanPlayer:
     def __init__(self, name):
-        self.name = name
+        self.name = name 
+    
+    def cell_to_row_col(self,cell_number):
+        if not 1 <= cell_number <= 9:
+            raise ValueError("Cell number must be between 1 and 9")
 
+        row = (cell_number - 1) // 3
+        col = (cell_number - 1) % 3
+        return row, col
+
+    
     def chooseAction(self, positions):
         while True:
-            row = int(input("Input your action row:"))
-            col = int(input("Input your action col:"))
+            cell = int(input("Input your action:"))
+            row,col = self.cell_to_row_col(cell)
             action = (row, col)
             if action in positions:
                 return action
+            
 
+
+    
     # append a hash state
     def addState(self, state):
         pass
-
+    
     # at the end of game, backpropagate and update states value
     def feedReward(self, reward):
         pass
-
+            
     def reset(self):
         pass
 
 
 if __name__ == "__main__":
-    # training
+    
     p1 = Player("p1")
     p2 = Player("p2")
-
     st = State(p1, p2)
-    print("training...")
-    st.play(50000)
+
+    # If you want to re-train the agent change the variable at the beginning of the code to True
+    # The agent takes approximately 3 minutes to train
+    if train:
+        print("training...")
+        st.play(5000)
+        p1.savePolicy()
+        p2.savePolicy()
 
     # play with human
     p1 = Player("computer", exp_rate=0)
-    p1.loadPolicy("policy_p1")
+    p1.loadPolicy("TicTacToe/policy_p1")
 
     p2 = HumanPlayer("human")
 
